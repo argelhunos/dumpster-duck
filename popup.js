@@ -16,3 +16,25 @@ chrome.tabs.query({ active: true, currentWindow: true}, (tabs) => {
         })
     }
 })
+
+document.addEventListener("DOMContentLoaded", () => {
+    const submitButton = document.getElementById("submit");
+
+    submitButton.addEventListener("click", (tab) => {
+        // another query to get the active tab for its id to send message
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            const activeTab = tabs[0]; 
+
+            if (activeTab) {
+                // send message to the tab
+                chrome.tabs.sendMessage(activeTab.id, { message: "paper" }, (response) => {
+                    if (chrome.runtime.lastError) {
+                        console.log("error sending message!")
+                    } else {
+                        console.log("success changing tab.")
+                    }
+                })
+            }
+        })
+    })
+})
