@@ -1,0 +1,11 @@
+{
+    "name": "Dumpster Duck",
+    "version": "1.0.0",
+    "description": "search where to put your waste quickly with a snap of a pic",
+    "manifest_version": 3,
+    "author": "Cindy Hua, Mikayla Morrison, Argel Hunos",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Dumpster Duck"
+    }
+}
