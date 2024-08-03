@@ -12,9 +12,9 @@
         "default_popup": "index.html",
         "default_title": "Dumpster Duck", 
         "default_icon": {           
-        "16": "images/Dumpster Duck (Transparent, 16x16).png",   
-        "48": "images/Dumpster Duck (Transparent, 48x48).png",   
-        "128": "images/Dumpster Duck (Transparent, 128x128).png" 
+        "16": "Components/images/Dumpster Duck (Transparent, 16x16).png",   
+        "48": "Components/images/Dumpster Duck (Transparent, 48x48).png",   
+        "128": "Components/images/Dumpster Duck (Transparent, 128x128).png" 
       }
     },
     "content_scripts": [
