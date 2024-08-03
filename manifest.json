@@ -1,11 +1,21 @@
 {
     "name": "Dumpster Duck",
     "version": "1.0.0",
+    "permissions": [
+        "tabs",
+        "activeTab"
+    ],
     "description": "search where to put your waste quickly with a snap of a pic",
     "manifest_version": 3,
     "author": "Cindy Hua, Mikayla Morrison, Argel Hunos",
-    "action":{
+    "action": {
         "default_popup": "index.html",
         "default_title": "Dumpster Duck"
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.torontomu.ca/sustainability/zero-waste/recycling-waste/waste-wizard/*"],
+            "js": ["context.js"]
+        }
+    ]
 }
