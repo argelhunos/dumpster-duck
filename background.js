@@ -17,7 +17,7 @@ async function requestVisionAPI(base64String) {
         ]
     };
 
-    return await fetch("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAf8GVkVGXaW6O4uFhzL7ppcY0poQeKHAw", {
+    return await fetch("https://vision.googleapis.com/v1/images:annotate?key=APIKEY", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ async function requestVisionAPI(base64String) {
 }
 
 async function requestGeminiAPI(base64String) {
-    const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAPoavoObej2e03bVHcR_LBJ1myhqPTR6I"
+    const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=APIKEY"
 
     const request = {
         contents: [
