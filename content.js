@@ -4,21 +4,17 @@ let searchBtn;
 let uploadbtn;
 
 function insertUploadButton() {
-    const uploadButton = document.createElement('a');
-    uploadButton.id = 'uploadbtn-search';
-    uploadButton.href = '#';
-    uploadButton.className = 'btn btn-success';
-    uploadButton.textContent = 'Upload Image';
+    uploadbtn = document.createElement('a');
+    uploadbtn.id = 'uploadbtn-search';
+    uploadbtn.className = 'btn btn-success';
+    uploadbtn.textContent = 'Upload Image';
 
     const searchButton = document.getElementById('rCbtn-search');
-    console.log('searchButton:', searchButton);
 
     if (searchButton) {
-        searchButton.insertAdjacentElement('afterend', uploadButton);
-        console.log('Upload button inserted.');
+        searchButton.insertAdjacentElement('afterend', uploadbtn);
         return true;
     } else {
-        console.error('Element with id "rCbtn-search" not found.');
         return false;
     }
 }
@@ -26,15 +22,14 @@ function insertUploadButton() {
 // Try inserting the button immediately in case the element is already there
 if (!insertUploadButton()) {
     // If the immediate attempt failed, set up a MutationObserver to watch for changes
-    console.log('Setting up MutationObserver.');
 
     const observer = new MutationObserver((mutations, observer) => {
         if (insertUploadButton()) {
             // If the button is successfully inserted, disconnect the observer
+            uploadbtn.addEventListener("click", handleUploadButtonClick);
             observer.disconnect();
         }
     });
-
     observer.observe(document.body, { childList: true, subtree: true });
 }
 
@@ -42,12 +37,33 @@ const observer = new MutationObserver(function (mutations, mutationInstance) {
     searchBox = document.getElementById("row-input-0");
     searchBtn = document.getElementById("rCbtn-search");
     if (searchBox && searchBtn) {
-        // searchBox.value = "cellphone";
-        // searchBtn.click();
-        // console.log("done!")
         mutationInstance.disconnect();
     }
 })
+
+function handleUploadButtonClick() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.style.display="none";
+    fileInput.addEventListener('change', handleFileSelect);
+    fileInput.click();
+}
+
+function handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onloadend = function(){
+            const base64String = reader.result.split(',')[1];
+
+            chrome.runtime.sendMessage({action: "SUBMIT", message: base64String});
+        }
+
+        reader.readAsDataURL(file);
+    }
+}
 
 observer.observe(document, {
     childList: true,
@@ -55,7 +71,15 @@ observer.observe(document, {
 })
 
 // receive the message from background script
-chrome.runtime.onMessage.addListener(function (request, sender, sendResopnse) {
-    searchBox.value = request.message;
-    searchBtn.click();
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    switch(request.action){
+        case "SUBMITTED":
+            searchBox.value = request.message.trim();
+            searchBtn.click();
+            sendResponse({status:200})
+            break;
+        default:
+            console.warn("Unhandled request.message from content.js", request.message)
+            break;
+    }
 })

@@ -1,3 +1,4 @@
+
 // redirect user to correct page if user is on wrong page when clicked
 const newPage = "https://www.torontomu.ca/sustainability/zero-waste/recycling-waste/waste-wizard/";
 
@@ -17,24 +18,29 @@ chrome.tabs.query({ active: true, currentWindow: true}, (tabs) => {
     }
 })
 
+
 document.addEventListener("DOMContentLoaded", () => {
     const submitButton = document.getElementById("submit");
 
     submitButton.addEventListener("click", (tab) => {
-        // another query to get the active tab for its id to send message
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            const activeTab = tabs[0]; 
 
-            if (activeTab) {
-                // send message to the tab
-                chrome.tabs.sendMessage(activeTab.id, { message: "paper" }, (response) => {
-                    if (chrome.runtime.lastError) {
-                        console.log("error sending message!")
-                    } else {
-                        console.log("success changing tab.")
-                    }
-                })
-            }
-        })
+        // convert image uploaded into base64
+        let file = document.querySelector('input[type=file]')['files'][0];
+
+        // exit early if there is no file uploaded yet
+        if (!file) {
+            alert("Please upload an image!");
+            return;
+        }
+
+        let reader = new FileReader(); // file reader to convert file to base64
+
+
+        reader.onload = function () {
+            const base64String = reader.result.split(',')[1];
+            
+            chrome.runtime.sendMessage({action: "SUBMIT", message: base64String});
+        }
+        reader.readAsDataURL(file);
     })
 })

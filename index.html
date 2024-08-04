@@ -1,12 +1,21 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dumpster Duck</title>
-    <script src="popup.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="popup.js" defer></script>
 </head>
-
 <body>
-    <img src="Components/images/Dumpster Duck(200x200).png" alt="Dumpster Duck">
+    <div class="popup-container">
+        <h1 class="popup-title">Dumpster Duck</h1>
+        <img src="Components/images/dumpsterduck200.png" alt="Dumpster Duck" class="logo">
+        <div class="file-input-container">
+            <input type="file" id="file-input" name="file" accept="image/*" class="file-input">
+            <label for="file-input" class="file-input-label">Choose File</label>
+        </div>
+        <button id="submit" class="submit-button">Upload</button>
+    </div>
 </body>
 </html>

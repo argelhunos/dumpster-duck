@@ -1,0 +1,90 @@
+/* Base colors */
+:root {
+    --primary-color: #587042;
+    --secondary-color: #A9B494;
+    --background-color: #fffffd;
+    --highlight-color: #F8DE8C;
+    --accent-color: #F6C431;
+    --text-color: #141414; /* Dark gray for text */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.popup-container {
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    background-color: var(--background-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 10px; /* Reduce space between items */
+}
+
+.title {
+    margin: 0;
+    font-size: 1.5em;
+    color: var(--text-color); /* Dark gray text color */
+}
+.popup-title {
+    margin: 0;
+    font-size: 2.5em; /* Adjust size as needed */
+    color: var(--accent-color); /* Yellow color for the title */
+}
+
+.logo {
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+}
+
+.file-input-container {
+    display: flex;
+    flex-direction: column; /* Stack file input and label vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+.file-input {
+    background-color: var(--background-color);
+    width: 100%; /* Ensure full width */
+    opacity: 0; /* Hide the default input */
+}
+
+.file-input-label {
+    background-color: var(--highlight-color);
+    padding: 10px 20px;
+    color: var(--text-color);
+    cursor: pointer;
+    display: inline-block;
+}
+
+.file-input-label:hover {
+    background-color: var(--accent-color);
+}
+
+.file-input:focus + .file-input-label {
+    outline: none; /* Remove focus outline for better styling */
+}
+
+
+.submit-button {
+    background-color: var(--highlight-color);
+    border: none;
+    color: var(--text-color);
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: var(--accent-color);
+}

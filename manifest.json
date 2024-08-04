@@ -3,8 +3,12 @@
     "version": "1.0.0",
     "permissions": [
         "tabs",
-        "activeTab"
+        "activeTab",
+        "storage"
     ],
+    "background": {
+        "service_worker": "background.js"
+    },
     "description": "search where to put your waste quickly with a snap of a pic",
     "manifest_version": 3,
     "author": "Cindy Hua, Mikayla Morrison, Argel Hunos",
@@ -14,7 +18,7 @@
         "default_icon": {           
         "16": "Components/images/Dumpster Duck (Transparent, 16x16).png",   
         "48": "Components/images/Dumpster Duck (Transparent, 48x48).png",   
-        "128": "Components/images/Dumpster Duck (Transparent, 128x128).png" 
+        "128": "Components/images/dumpsterduck128.png" 
       }
     },
     "content_scripts": [
